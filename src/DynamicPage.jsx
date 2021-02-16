@@ -1,10 +1,10 @@
-import { Header } from "semantic-ui-react";
 import Layout from "./Layout";
-
+import React from "react";
+import { Button } from "antd";
 const DynamicPage = () => {
   return (
     <Layout>
-      <Header as='h2'>Dynamic Page</Header>
+      <Button>8888</Button>
       <p>This page was loaded asynchronously</p>
     </Layout>
   );

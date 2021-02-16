@@ -19,8 +19,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist")
   },
   mode: "production",
-
-  //   devtool: 'inline-source-map',
   devServer: {
     contentBase: "./dist",
     hot: true,
@@ -96,13 +94,7 @@ module.exports = {
   optimization: {
     minimizer: [new OptimizeCSSAssetsPlugin({})],
     splitChunks: {
-      cacheGroups: {
-        // styles: {
-        //     test: /\.css$|\.less$/,
-        //     chunks: 'all',
-        //     enforce: true,
-        // },
-      },
+      cacheGroups: {},
       chunks: "all"
     }
   }
