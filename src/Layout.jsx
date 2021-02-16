@@ -1,5 +1,10 @@
 const Layout = ({ children }) => {
-  return <div>{children}</div>;
+  return (
+    <div>
+      {children}
+      {/* <Card></Card> */}
+    </div>
+  );
 };
 
 export default Layout;
