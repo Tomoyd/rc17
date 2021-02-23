@@ -1,4 +1,3 @@
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const { default: merge } = require("webpack-merge");
 const webpackCommon = require("./webpack.common");
 const path = require("path");
@@ -61,14 +60,6 @@ module.exports = merge(webpackCommon, {
           minChunks: 1,
           reuseExistingChunk: true,
           priority: 90,
-          enforce: true
-        },
-        other: {
-          chunks: "all",
-          name: "other",
-          minChunks: 1,
-          reuseExistingChunk: true,
-          priority: 50,
           enforce: true
         }
       }
