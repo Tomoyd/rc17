@@ -3,6 +3,7 @@ const { default: merge } = require("webpack-merge");
 const webpackCommon = require("./webpack.common");
 const path = require("path");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 module.exports = merge(webpackCommon, {
   mode: "production",
   output: {
@@ -10,9 +11,18 @@ module.exports = merge(webpackCommon, {
     path: path.resolve(__dirname, "dist")
   },
   // devtool: "source-map",
-
+  externals: {
+    react: "React",
+    "react-dom": "ReactDOM"
+  },
   optimization: {
-    minimizer: [new OptimizeCssAssetsPlugin({})],
+    // minimize: true,
+    minimizer: [
+      new OptimizeCssAssetsPlugin({}),
+      new TerserPlugin({
+        parallel: true
+      })
+    ],
     splitChunks: {
       // 默认值async
       // initial模块会分开优化打包 异步和非异步引入的包
@@ -43,24 +53,24 @@ module.exports = merge(webpackCommon, {
           reuseExistingChunk: true,
           priority: 100,
           enforce: true
+        },
+        ui: {
+          chunks: "all",
+          test: /antd/,
+          name: "ui",
+          minChunks: 1,
+          reuseExistingChunk: true,
+          priority: 90,
+          enforce: true
+        },
+        other: {
+          chunks: "all",
+          name: "other",
+          minChunks: 1,
+          reuseExistingChunk: true,
+          priority: 50,
+          enforce: true
         }
-        // ui: {
-        //   chunks: "all",
-        //   test: /antd/,
-        //   name: "ui",
-        //   minChunks: 1,
-        //   reuseExistingChunk: true,
-        //   priority: 90,
-        //   enforce: true
-        // },
-        // other: {
-        //   chunks: "all",
-        //   name: "other",
-        //   minChunks: 1,
-        //   reuseExistingChunk: true,
-        //   priority: 50,
-        //   enforce: true
-        // }
       }
     }
   }
