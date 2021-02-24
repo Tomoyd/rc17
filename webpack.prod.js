@@ -7,19 +7,20 @@ module.exports = merge(webpackCommon, {
   mode: "production",
   output: {
     filename: "js/[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    chunkFilename: "js/[name].js"
   },
   // devtool: "source-map",
-  externals: {
-    react: "React",
-    "react-dom": "ReactDOM"
-  },
+  // externals: {
+  //   react: "React",
+  //   "react-dom": "ReactDOM"
+  // },
   optimization: {
-    // minimize: true,
+    minimize: true,
     minimizer: [
       new OptimizeCssAssetsPlugin({}),
       new TerserPlugin({
-        parallel: true
+        parallel: 4
       })
     ],
     splitChunks: {

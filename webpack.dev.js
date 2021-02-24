@@ -3,7 +3,6 @@ const webpackCommon = require("./webpack.common");
 
 module.exports = merge(webpackCommon, {
   mode: "development",
-
   devServer: {
     contentBase: "./dist",
     open: true,
