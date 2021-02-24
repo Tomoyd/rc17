@@ -32,12 +32,12 @@ module.exports = {
     path: path.resolve(__dirname, "dist")
   },
   resolve: {
-    alias: {
-      react: path.resolve(
-        __dirname,
-        "./node_modules/react/umd/react.production.min.js"
-      )
-    },
+    // alias: {
+    //   react: path.resolve(
+    //     __dirname,
+    //     "./node_modules/react/umd/react.production.min.js"
+    //   )
+    // },
     extensions: [".js", ".jsx", ".json"]
   },
   // cdn引入时

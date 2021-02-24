@@ -3,6 +3,7 @@ const webpackCommon = require("./webpack.common");
 const path = require("path");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const webpack = require("webpack");
 module.exports = merge(webpackCommon, {
   mode: "production",
   output: {
@@ -15,7 +16,9 @@ module.exports = merge(webpackCommon, {
   //   react: "React",
   //   "react-dom": "ReactDOM"
   // },
+  // plugins:[new webpack.optimize.ModuleConcatenationPlugin],
   optimization: {
+    concatenateModules: true,
     minimize: true,
     minimizer: [
       new OptimizeCssAssetsPlugin({}),

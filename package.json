@@ -11,7 +11,7 @@
     "conf": "webpack --config webpack.config.js ",
     "dll": "webpack --config webpack.dll.js"
   },
-  "author": "",
+  "author": "tomoyd",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -44,6 +44,12 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.7.3"
   },
+  "browserslist": [
+    ">1%",
+    "last 2 versions",
+    "not dead",
+    "not ie<=10"
+  ],
   "dependencies": {
     "antd": "^4.12.3",
     "react": "^17.0.1",
