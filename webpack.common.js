@@ -12,16 +12,16 @@ files.forEach((file) => {
   if (/.*\.dll.js/.test(file)) {
     dllPlugins.push(
       new AddAssetHtmlWebpackPlugin({
-        filepath: path.resolve(__dirname, "./dll", file)
-      })
+        filepath: path.resolve(__dirname, "./dll", file),
+      }),
     );
   }
   if (/\.*\.manifest.json/.test(file)) {
     dllPlugins.push(
       new webpack.DllReferencePlugin({
         context: __dirname,
-        manifest: path.resolve(__dirname, "./dll", file)
-      })
+        manifest: path.resolve(__dirname, "./dll", file),
+      }),
     );
   }
 });
@@ -29,7 +29,7 @@ module.exports = {
   entry: "./src/index.jsx",
   output: {
     filename: "js/[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
   },
   resolve: {
     // alias: {
@@ -38,7 +38,7 @@ module.exports = {
     //     "./node_modules/react/umd/react.production.min.js"
     //   )
     // },
-    extensions: [".js", ".jsx", ".json"]
+    extensions: [".js", ".jsx", ".json"],
   },
   // cdn引入时
   // externals: {
@@ -50,64 +50,69 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: path.resolve("./src"),
-        use: ["thread-loader", "babel-loader"]
+        use: ["thread-loader", "babel-loader"],
       },
       {
-        test: /\.less$/,
+        test: /\.css$/,
         include: /node_modules/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader"
-          },
-          {
-            loader: "less-loader",
-            options: {
-              lessOptions: {
-                javascriptEnabled: true
-              }
-            }
-          }
-        ]
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
+      // {
+      //   test: /\.less$/,
+      //   // include: /node_modules/,
+      //   use: [
+      //     MiniCssExtractPlugin.loader,
+      //     {
+      //       loader: "css-loader",
+      //     },
+      //     {
+      //       loader: "less-loader",
+      //       options: {
+      //         lessOptions: {
+      //           javascriptEnabled: true,
+      //         },
+      //       },
+      //     },
+      //   ],
+      // },
       {
         test: /\.less$/,
-        exclude: /node_modules/,
+        // exclude: /antd/,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[name]_[local]--[hash:base64:5]"
-              }
-            }
+                localIdentName: "[name]_[local]--[hash:base64:5]",
+              },
+            },
           },
           {
             loader: "less-loader",
             options: {
               lessOptions: {
-                javascriptEnabled: true
-              }
-            }
-          }
-        ]
-      }
-    ]
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/main.css",
-      chunkFilename: "css/[id].css"
+      chunkFilename: "css/[id].css",
     }),
     new CleanWebpackPlugin({
-      cleanStaleWebpackAssets: false
+      cleanStaleWebpackAssets: false,
     }),
     ...dllPlugins,
     new HtmlWebpackPlugin({
       title: "hello react",
       filename: "index.html",
-      template: "index.html"
-    })
-  ]
+      template: "index.html",
+    }),
+  ],
 };
